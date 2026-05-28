@@ -1,0 +1,2 @@
+Imported EmotionDetection successfully
+{'anger': 0.03, 'disgust': 0.01, 'fear': 0.01, 'joy': 0.9, 'sadness': 0.05, 'dominant_emotion': 'joy'}

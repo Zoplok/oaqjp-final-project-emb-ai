@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Emotion Detector</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f4f1ea;
+        --panel: #fffaf3;
+        --text: #1f2937;
+        --accent: #0f766e;
+        --accent-2: #f59e0b;
+        --border: #d6cfc4;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(135deg, #f8efe2, #e8f2f0);
+        color: var(--text);
+      }
+
+      .wrap {
+        max-width: 760px;
+        margin: 48px auto;
+        padding: 0 20px;
+      }
+
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 28px;
+        box-shadow: 0 20px 50px rgba(31, 41, 55, 0.12);
+      }
+
+      h1 {
+        margin-top: 0;
+        font-size: 2rem;
+      }
+
+      label {
+        display: block;
+        margin: 18px 0 8px;
+        font-weight: 700;
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 120px;
+        padding: 14px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        font: inherit;
+        resize: vertical;
+        box-sizing: border-box;
+      }
+
+      button {
+        margin-top: 16px;
+        border: 0;
+        border-radius: 999px;
+        padding: 12px 18px;
+        font-weight: 700;
+        color: white;
+        background: linear-gradient(135deg, var(--accent), #155e75);
+        cursor: pointer;
+      }
+
+      .result {
+        margin-top: 20px;
+        padding: 16px;
+        border-radius: 12px;
+        background: #fff;
+        border: 1px solid var(--border);
+        min-height: 24px;
+        white-space: pre-wrap;
+      }
+
+      .hint {
+        color: #6b7280;
+        margin: 8px 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="card">
+        <h1>Emotion Detector</h1>
+        <p class="hint">Type a sentence and click Analyze to see the dominant emotion.</p>
+
+        <label for="textToAnalyze">Text to analyze</label>
+        <textarea id="textToAnalyze" placeholder="Example: I am thrilled about this project."></textarea>
+        <button id="analyzeBtn" type="button">Analyze</button>
+
+        <div class="result" id="result">Your result will appear here.</div>
+      </section>
+    </main>
+
+    <script>
+      const input = document.getElementById("textToAnalyze");
+      const button = document.getElementById("analyzeBtn");
+      const result = document.getElementById("result");
+
+      button.addEventListener("click", async () => {
+        const text = input.value.trim();
+        const response = await fetch(`/emotionDetector?textToAnalyze=${encodeURIComponent(text)}`);
+        result.textContent = await response.text();
+      });
+    </script>
+  </body>
+</html>
